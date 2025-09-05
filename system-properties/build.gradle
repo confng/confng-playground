@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.confng:confng:1.0.0'
+    testImplementation 'org.testng:testng:7.11.0'
+}
+
+test {
+    useTestNG()
+    
+    // Set system properties for testing
+    systemProperty 'app.name', 'ConfNG System Properties Example'
+    systemProperty 'app.profile', 'test'
+    systemProperty 'webdriver.browser', 'firefox'
+    systemProperty 'webdriver.headless', 'true'
+    systemProperty 'test.parallel', 'true'
+    systemProperty 'test.threads', '4'
+    systemProperty 'report.output.dir', './test-reports'
+}

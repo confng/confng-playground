@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.confng:confng:1.0.0'
+    testImplementation 'org.testng:testng:7.8.0'
+    
+    // H2 database for testing
+    testImplementation 'com.h2database:h2:2.2.224'
+    
+    // JDBC driver (in real usage, you'd use your actual database driver)
+    // implementation 'org.postgresql:postgresql:42.6.0'
+    // implementation 'mysql:mysql-connector-java:8.0.33'
+}
+
+test {
+    useTestNG()
+}

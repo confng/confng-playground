@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.confng:confng:1.0.0'
+    testImplementation 'org.testng:testng:7.11.0'
+}
+
+test {
+    useTestNG()
+    
+    // Set environment variables for testing
+    environment 'APP_NAME', 'ConfNG Environment Example'
+    environment 'APP_VERSION', '2.0.0'
+    environment 'APP_DEBUG', 'true'
+    environment 'DATABASE_URL', 'jdbc:postgresql://localhost:5432/testdb'
+    environment 'DATABASE_USERNAME', 'testuser'
+    environment 'DATABASE_PASSWORD', 'secret123'
+    environment 'API_KEY', 'sk-test-key-12345'
+    environment 'API_TIMEOUT', '10000'
+}

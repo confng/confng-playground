@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.confng:confng:1.0.0'
+    testImplementation 'org.testng:testng:7.11.0'
+}
+
+test {
+    useTestNG()
+}

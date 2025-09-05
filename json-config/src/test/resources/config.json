@@ -1,0 +1,24 @@
+{
+  "app": {
+    "name": "ConfNG JSON Example",
+    "version": "1.0.0",
+    "debug": true
+  },
+  "database": {
+    "url": "jdbc:h2:mem:testdb",
+    "username": "sa",
+    "password": "",
+    "maxConnections": 10
+  },
+  "webdriver": {
+    "browser": "chrome",
+    "headless": false,
+    "timeout": 30,
+    "implicitWait": 10
+  },
+  "api": {
+    "baseUrl": "https://api.example.com",
+    "timeout": 5000,
+    "retries": 3
+  }
+}
