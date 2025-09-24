@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.confng.playground'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.confng:confng:${findProperty('confngVersion') ?: '1.0.1'}"
+    testImplementation "org.testng:testng:${findProperty('testngVersion') ?: '7.11.0'}"
+    testImplementation "org.assertj:assertj-core:${findProperty('assertjVersion') ?: '3.24.2'}"
+    testImplementation 'com.google.inject:guice:7.0.0'
+    testImplementation "org.slf4j:slf4j-simple:${findProperty('slf4jVersion') ?: '2.0.7'}"
+}
+
+test {
+    useTestNG()
+    
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+    
+    // Set system properties for testing
+    systemProperty 'app.profile', 'test'
+    systemProperty 'config.environment', 'test'
+}

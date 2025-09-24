@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.confng.playground'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.confng:confng:${findProperty('confngVersion') ?: '1.0.1'}"
+    testImplementation "org.testng:testng:${findProperty('testngVersion') ?: '7.11.0'}"
+    testImplementation "org.assertj:assertj-core:${findProperty('assertjVersion') ?: '3.24.2'}"
+    testImplementation 'com.google.inject:guice:7.0.0'
+    testImplementation "org.slf4j:slf4j-simple:${findProperty('slf4jVersion') ?: '2.0.7'}"
+}
+
+test {
+    useTestNG()
+    
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+    
+    // Set some system properties for testing precedence
+    systemProperty 'app.environment', 'test'
+    systemProperty 'test.precedence', 'system-property'
+    systemProperty 'database.pool.timeout', '45000'
+}

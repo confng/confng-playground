@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.1.dtd">
+<suite name="ConfNG-TestNG-Suite" parallel="false" thread-count="1" verbose="1">
+
+    <parameter name="environment" value="test"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="app.name" value="abc"/>
+
+    <test name="Basic-Configuration-Tests" preserve-order="true">
+        <parameter name="app.name" value="abcd"/>
+        <classes>
+            <class name="org.confng.playground.testng.BasicConfigurationTest"/>
+        </classes>
+    </test>
+
+    <test name="Database-Configuration-Tests">
+        <parameter name="app.name" value="abcde"/>
+        <classes>
+            <class name="org.confng.playground.testng.DatabaseConfigurationTest"/>
+        </classes>
+    </test>
+
+    <test name="API-Configuration-Tests">
+        <groups>
+            <run>
+                <include name="api-config"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="org.confng.playground.testng.ApiConfigurationTest"/>
+        </classes>
+    </test>
+
+    <test name="Feature-Flags-Tests">
+        <groups>
+            <run>
+                <include name="feature-flags"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="org.confng.playground.testng.FeatureFlagsTest"/>
+        </classes>
+    </test>
+
+    <test name="Parallel-Execution-Tests" parallel="methods" thread-count="10">
+        <groups>
+            <run>
+                <include name="parallel-execution"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="org.confng.playground.testng.ParallelExecutionTest"/>
+        </classes>
+    </test>
+
+    <test name="Performance-Tests">
+        <groups>
+            <run>
+                <include name="performance"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="org.confng.playground.testng.PerformanceTest"/>
+        </classes>
+    </test>
+
+</suite>

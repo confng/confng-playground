@@ -2,13 +2,23 @@ plugins {
     id 'java'
 }
 
+group = 'org.confng.playground'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.confng:confng:1.0.0'
-    testImplementation 'org.testng:testng:7.8.0'
+    implementation 'org.confng:confng:1.0.1'
+    testImplementation 'org.testng:testng:7.11.0'
+    testImplementation 'com.google.inject:guice:7.0.0'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
     
     // H2 database for testing
     testImplementation 'com.h2database:h2:2.2.224'
@@ -20,4 +30,17 @@ dependencies {
 
 test {
     useTestNG()
+
+    // TestNG configuration
+    systemProperty 'testng.dtd.http', 'true'
+
+    // Parallel execution settings
+    maxParallelForks = Runtime.runtime.availableProcessors()
+
+    // Test output settings
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = false
+    }
 }

@@ -1,0 +1,117 @@
+app:
+  name: "ConfNG YAML Example"
+  version: "1.0.0"
+  environment: "development"
+  debug: true
+  description: "Example application demonstrating YAML configuration with ConfNG"
+  features:
+    - "new-ui"
+    - "analytics"
+    - "caching"
+    - "monitoring"
+
+database:
+  primary:
+    url: "jdbc:postgresql://localhost:5432/primary"
+    username: "primary_user"
+    password: "primary_pass"
+    driver: "org.postgresql.Driver"
+    pool:
+      maxSize: 20
+      minSize: 5
+      timeout: 30000
+      idleTimeout: 600000
+  secondary:
+    url: "jdbc:postgresql://localhost:5432/secondary"
+    username: "secondary_user"
+    password: "secondary_pass"
+    pool:
+      maxSize: 10
+      minSize: 2
+      timeout: 25000
+
+webdriver:
+  browser: "chrome"
+  headless: false
+  timeout: 45
+  implicitWait: 15
+  pageLoadTimeout: 60
+  capabilities:
+    chrome:
+      switches:
+        - "--disable-web-security"
+        - "--no-sandbox"
+        - "--disable-dev-shm-usage"
+      prefs:
+        download.default_directory: "/tmp/downloads"
+        profile.default_content_settings.popups: 0
+
+api:
+  services:
+    payment:
+      baseUrl: "https://api.stripe.com"
+      timeout: 15000
+      retryAttempts: 3
+      apiVersion: "2023-10-16"
+    notification:
+      baseUrl: "https://api.sendgrid.com"
+      timeout: 10000
+      retryAttempts: 2
+      apiVersion: "v3"
+    analytics:
+      baseUrl: "https://api.analytics.com"
+      timeout: 8000
+      retryAttempts: 1
+      batchSize: 100
+
+monitoring:
+  metrics:
+    enabled: true
+    interval: 60000
+    exporters:
+      - "prometheus"
+      - "datadog"
+      - "newrelic"
+    tags:
+      service: "confng-example"
+      environment: "development"
+  logging:
+    level: "INFO"
+    appenders:
+      - type: "console"
+        pattern: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+      - type: "file"
+        file: "application.log"
+        maxSize: "10MB"
+        maxFiles: 5
+
+cache:
+  redis:
+    host: "localhost"
+    port: 6379
+    database: 0
+    timeout: 5000
+    pool:
+      maxActive: 20
+      maxIdle: 10
+      minIdle: 2
+  local:
+    maxSize: 1000
+    ttl: 3600
+    evictionPolicy: "LRU"
+
+security:
+  jwt:
+    secret: "jwt-secret-key"
+    expiration: 86400
+    issuer: "confng-example"
+  oauth:
+    providers:
+      google:
+        clientId: "google-client-id"
+        clientSecret: "google-client-secret"
+        redirectUri: "http://localhost:8080/oauth/google/callback"
+      github:
+        clientId: "github-client-id"
+        clientSecret: "github-client-secret"
+        redirectUri: "http://localhost:8080/oauth/github/callback"
