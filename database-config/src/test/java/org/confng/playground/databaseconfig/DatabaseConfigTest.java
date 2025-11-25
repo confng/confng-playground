@@ -35,8 +35,8 @@ public class DatabaseConfigTest {
         System.setProperty("database.timeout", "30000");
         System.setProperty("api.rate-limit", "1000");
         System.setProperty("api.timeout", "15000");
-        System.setProperty("api.secret-key", "sk-secret-database-key-12345");
-        System.setProperty("encryption.key", "db-encryption-key-xyz789");
+        System.setProperty("api.secret-key", "example-secret-key-replace-with-real");
+        System.setProperty("encryption.key", "example-encryption-key-replace-with-real");
         System.setProperty("features.new-ui", "true");
         System.setProperty("features.beta-api", "false");
         System.setProperty("features.analytics", "true");
@@ -63,7 +63,7 @@ public class DatabaseConfigTest {
         
         String secretKey = ConfNG.get(ApiSecurityConfig.API_SECRET_KEY);
         assertNotNull(secretKey);
-        assertEquals(secretKey, "sk-secret-database-key-12345");
+        assertEquals(secretKey, "example-secret-key-replace-with-real");
     }
 
     @Test

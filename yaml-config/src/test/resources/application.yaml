@@ -48,18 +48,18 @@ webdriver:
 
 api:
   services:
-    payment:
-      baseUrl: "https://api.stripe.com"
+    service1:
+      baseUrl: "https://api.example-service1.com"
       timeout: 15000
       retryAttempts: 3
-      apiVersion: "2023-10-16"
-    notification:
-      baseUrl: "https://api.sendgrid.com"
+      apiVersion: "v1"
+    service2:
+      baseUrl: "https://api.example-service2.com"
       timeout: 10000
       retryAttempts: 2
-      apiVersion: "v3"
-    analytics:
-      baseUrl: "https://api.analytics.com"
+      apiVersion: "v1"
+    service3:
+      baseUrl: "https://api.example-service3.com"
       timeout: 8000
       retryAttempts: 1
       batchSize: 100
@@ -69,9 +69,9 @@ monitoring:
     enabled: true
     interval: 60000
     exporters:
-      - "prometheus"
-      - "datadog"
-      - "newrelic"
+      - "exporter1"
+      - "exporter2"
+      - "exporter3"
     tags:
       service: "confng-example"
       environment: "development"
@@ -102,16 +102,16 @@ cache:
 
 security:
   jwt:
-    secret: "jwt-secret-key"
+    secret: "example-jwt-secret-replace-with-real"
     expiration: 86400
     issuer: "confng-example"
   oauth:
     providers:
-      google:
-        clientId: "google-client-id"
-        clientSecret: "google-client-secret"
-        redirectUri: "http://localhost:8080/oauth/google/callback"
-      github:
-        clientId: "github-client-id"
-        clientSecret: "github-client-secret"
-        redirectUri: "http://localhost:8080/oauth/github/callback"
+      provider1:
+        clientId: "example-provider1-client-id-replace-with-real"
+        clientSecret: "example-provider1-secret-replace-with-real"
+        redirectUri: "http://localhost:8080/oauth/provider1/callback"
+      provider2:
+        clientId: "example-provider2-client-id-replace-with-real"
+        clientSecret: "example-provider2-secret-replace-with-real"
+        redirectUri: "http://localhost:8080/oauth/provider2/callback"

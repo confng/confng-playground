@@ -131,22 +131,22 @@ public class PropertiesConfigTest {
     @Test(groups = "properties-config")
     public void testSensitiveDataMasking() {
         // Test that sensitive values are masked for display
-        assertThat(ConfNG.getForDisplay(PropertiesConfig.API_STRIPE_SECRET_KEY))
+        assertThat(ConfNG.getForDisplay(PropertiesConfig.API_SERVICE1_SECRET_KEY))
             .isEqualTo("***MASKED***");
-        
-        assertThat(ConfNG.getForDisplay(PropertiesConfig.API_SENDGRID_API_KEY))
+
+        assertThat(ConfNG.getForDisplay(PropertiesConfig.API_SERVICE2_API_KEY))
             .isEqualTo("***MASKED***");
-        
+
         assertThat(ConfNG.getForDisplay(PropertiesConfig.OAUTH_CLIENT_SECRET))
             .isEqualTo("***MASKED***");
-        
+
         assertThat(ConfNG.getForDisplay(PropertiesConfig.DATABASE_ADMIN_PASSWORD))
             .isEqualTo("***MASKED***");
-        
+
         // Test that actual values are still accessible (not masked)
-        assertThat(ConfNG.get(PropertiesConfig.API_STRIPE_SECRET_KEY))
-            .isEqualTo("sk_test_123456789abcdef");
-        
+        assertThat(ConfNG.get(PropertiesConfig.API_SERVICE1_SECRET_KEY))
+            .isEqualTo("example_api_key_replace_with_real");
+
         assertThat(ConfNG.get(PropertiesConfig.DATABASE_ADMIN_USERNAME))
             .isEqualTo("admin");
     }
@@ -159,7 +159,7 @@ public class PropertiesConfigTest {
         
         // Test that missing sensitive keys return null (no default provided)
         assertThat(ConfNG.get(PropertiesConfig.ENCRYPTION_MASTER_KEY))
-            .isEqualTo("master-encryption-key-123");
+            .isEqualTo("example_master_key_replace_with_real");
     }
     
     @Test(groups = "properties-config")
@@ -171,7 +171,7 @@ public class PropertiesConfigTest {
         
         // secrets.properties should provide sensitive values
         assertThat(ConfNG.get(PropertiesConfig.JWT_SIGNING_KEY))
-            .isEqualTo("jwt-secret-key-123456789");
+            .isEqualTo("example_jwt_key_replace_with_real");
     }
     
     @Test(groups = "properties-config")
@@ -180,14 +180,14 @@ public class PropertiesConfigTest {
         String allConfig = ConfNG.getAllForDisplay(
             PropertiesConfig.APP_NAME,
             PropertiesConfig.DATABASE_URL,
-            PropertiesConfig.API_STRIPE_SECRET_KEY,
+            PropertiesConfig.API_SERVICE1_SECRET_KEY,
             PropertiesConfig.WEBDRIVER_BROWSER
         );
         
         assertThat(allConfig)
             .contains("app.name = ConfNG Properties Example")
             .contains("database.url = jdbc:h2:mem:testdb")
-            .contains("api.stripe.secret-key = ***MASKED***")
+            .contains("api.service1.secret-key = ***MASKED***")
             .contains("webdriver.browser = chrome")
             .contains("(sensitive)");
     }

@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.confng.playground'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // ConfNG library
+    implementation 'org.confng:confng:1.0.2'
+
+    // TestNG for testing
+    testImplementation 'org.testng:testng:7.8.0'
+
+    // Google Guice (required by TestNG)
+    testImplementation 'com.google.inject:guice:5.1.0'
+
+    // AssertJ for fluent assertions
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+}
+
+test {
+    useTestNG()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
+}
+
+// Task to run UAT tests (demonstrates lowercase app_env parameter)
+task testUat(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testng-uat.xml'
+    }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
+}
+
+// Task to run Production tests (demonstrates uppercase APP_ENV parameter)
+task testProd(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testng-prod.xml'
+    }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+

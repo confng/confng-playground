@@ -29,7 +29,7 @@ app:
 
 database:
   primary:
-    url: "jdbc:postgresql://localhost:5432/primary"
+    url: "jdbc:database://localhost:5432/primary"
     username: "primary_user"
     password: "primary_pass"
     pool:
@@ -37,7 +37,7 @@ database:
       minSize: 5
       timeout: 30000
   secondary:
-    url: "jdbc:postgresql://localhost:5432/secondary"
+    url: "jdbc:database://localhost:5432/secondary"
     username: "secondary_user"
     password: "secondary_pass"
 
@@ -54,12 +54,12 @@ webdriver:
 
 api:
   services:
-    payment:
-      baseUrl: "https://api.stripe.com"
+    service1:
+      baseUrl: "https://api.example-service1.com"
       timeout: 15000
       retryAttempts: 3
-    notification:
-      baseUrl: "https://api.sendgrid.com"
+    service2:
+      baseUrl: "https://api.example-service2.com"
       timeout: 10000
       retryAttempts: 2
 
@@ -68,8 +68,8 @@ monitoring:
     enabled: true
     interval: 60000
     exporters:
-      - "prometheus"
-      - "datadog"
+      - "exporter1"
+      - "exporter2"
   logging:
     level: "INFO"
     appenders:
@@ -234,10 +234,10 @@ database_defaults: &database_defaults
 database:
   primary:
     <<: *database_defaults
-    url: "jdbc:postgresql://primary:5432/db"
+    url: "jdbc:database://primary:5432/db"
   secondary:
     <<: *database_defaults
-    url: "jdbc:postgresql://secondary:5432/db"
+    url: "jdbc:database://secondary:5432/db"
 ```
 
 ### 2. Environment-specific YAML

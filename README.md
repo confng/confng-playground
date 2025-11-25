@@ -13,6 +13,14 @@ cd <example-directory>
 
 ## Available Examples
 
+### ✨ [Environment Auto-Loading](environment-auto-loading/) **← NEW!**
+**Demonstrates the latest ConfNG features:**
+- Automatic environment detection via `autoLoadConfig()`
+- Global/common configuration loading via `loadGlobalConfig()`
+- Case-insensitive environment key detection (APP_ENV, app_env, App_Env, etc.)
+- Multi-source environment configuration (TestNG, env vars, system properties, config files)
+- Configuration precedence and override patterns
+
 ### 📄 [JSON Configuration](json-config/)
 Basic example using JSON files for configuration with TestNG tests. Perfect for getting started with ConfNG.
 

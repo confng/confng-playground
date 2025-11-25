@@ -60,8 +60,8 @@ public enum PropertiesConfig implements ConfNGKey {
     THREAD_POOL_SIZE("thread.pool.size", "5"),
     BATCH_SIZE("batch.size", "100"),
     // API Keys and Secrets (Sensitive)
-    API_STRIPE_SECRET_KEY("api.stripe.secret-key", null, true),
-    API_SENDGRID_API_KEY("api.sendgrid.api-key", null, true),
+    API_SERVICE1_SECRET_KEY("api.service1.secret-key", null, true),
+    API_SERVICE2_API_KEY("api.service2.api-key", null, true),
     OAUTH_CLIENT_SECRET("oauth.client-secret", null, true),
     JWT_SIGNING_KEY("jwt.signing-key", null, true),
     // Service Credentials (Sensitive)

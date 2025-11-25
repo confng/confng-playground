@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Production Environment Suite">
+    <!-- Set environment via TestNG parameter -->
+    <!-- Note: Use 'environment' or 'env' parameter name for automatic config loading -->
+    <parameter name="environment" value="prod"/>
+    
+    <listeners>
+        <listener class-name="org.confng.testng.TestNGParameterListener"/>
+    </listeners>
+    
+    <test name="Production Configuration Tests">
+        <classes>
+            <class name="org.confng.playground.envloading.EnvironmentAutoLoadingTest"/>
+            <class name="org.confng.playground.envloading.PrecedenceOrderTest"/>
+        </classes>
+    </test>
+</suite>
+

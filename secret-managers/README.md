@@ -1,6 +1,6 @@
 # Secret Managers Example
 
-This example demonstrates how to integrate ConfNG with secret management services like AWS Secrets Manager, Azure Key Vault, or HashiCorp Vault.
+This example demonstrates how to integrate ConfNG with secret management services like cloud provider secret managers or third-party vault solutions.
 
 ## Features Demonstrated
 
@@ -18,7 +18,7 @@ This example demonstrates how to integrate ConfNG with secret management service
 - User credentials
 
 ### API Keys
-- Third-party service API keys (Stripe, SendGrid, etc.)
+- Third-party service API keys
 - Internal service API keys
 - Authentication tokens
 
@@ -28,9 +28,9 @@ This example demonstrates how to integrate ConfNG with secret management service
 - Refresh tokens
 
 ### Cloud Provider Credentials
-- AWS access keys and secret keys
-- Azure service principal credentials
-- GCP service account keys
+- Cloud access keys and secret keys
+- Service principal credentials
+- Service account keys
 
 ## Key Features
 
@@ -54,30 +54,30 @@ public class MockSecretManagerSource extends SecretManagerSource {
 ```java
 public enum SecretConfig implements ConfNGKey {
     DB_PASSWORD("database/password", null, true),  // Marked as sensitive
-    API_KEY("api-keys/stripe", null, true);
+    SERVICE1_API_KEY("api-keys/service1", null, true);
 }
 
 // Sensitive values are automatically masked
-String masked = ConfNG.getForDisplay(SecretConfig.DB_PASSWORD); // Returns "***"
+String masked = ConfNG.getForDisplay(SecretConfig.DB_PASSWORD); // Returns "***MASKED***"
 ```
 
 ### Configuration Source Registration
 ```java
 @BeforeClass
 public void setup() {
-    SecretManagerSource secretManager = new AWSSecretsManagerSource("us-west-2");
+    SecretManagerSource secretManager = new CloudSecretsManagerSource("region-1");
     ConfNG.addSource(secretManager);
 }
 ```
 
 ## Real-world Integration
 
-### AWS Secrets Manager
+### Cloud Secrets Manager
 ```java
-public class AWSSecretsManagerSource extends SecretManagerSource {
+public class CloudSecretsManagerSource extends SecretManagerSource {
     private final SecretsManagerClient client;
-    
-    public AWSSecretsManagerSource(String region) {
+
+    public CloudSecretsManagerSource(String region) {
         super(region);
         this.client = SecretsManagerClient.builder()
             .region(Region.of(region))
@@ -183,9 +183,9 @@ public String getValue(String key) {
 ```
 
 ### 4. Use Proper Authentication
-- AWS: Use IAM roles, not hardcoded credentials
-- Azure: Use Managed Identity or Service Principal
-- Vault: Use AppRole or Kubernetes auth
+- Cloud Provider: Use IAM roles or managed identities, not hardcoded credentials
+- Vault Solutions: Use AppRole or Kubernetes auth
+- Always use environment-specific authentication mechanisms
 
 ## Running the Example
 
@@ -207,28 +207,28 @@ All tests should pass, demonstrating:
 
 ### Environment Variables for Authentication
 ```bash
-# AWS
-export AWS_REGION=us-west-2
-export AWS_ROLE_ARN=arn:aws:iam::123456789:role/MyAppRole
+# Cloud Provider Example
+export CLOUD_REGION=region-1
+export CLOUD_ROLE_ARN=arn:cloud:iam::123456789:role/MyAppRole
 
-# Azure
-export AZURE_CLIENT_ID=your-client-id
-export AZURE_TENANT_ID=your-tenant-id
-export AZURE_KEY_VAULT_URL=https://myvault.vault.azure.net/
+# Alternative Cloud Provider
+export CLOUD_CLIENT_ID=your-client-id
+export CLOUD_TENANT_ID=your-tenant-id
+export CLOUD_VAULT_URL=https://vault.example.com/
 
-# Vault
-export VAULT_ADDR=https://vault.company.com
+# Vault Solution
+export VAULT_ADDR=https://vault.example.com:8200
 export VAULT_TOKEN=your-vault-token
 ```
 
 ### Docker Integration
 ```dockerfile
-# Install AWS CLI or Azure CLI for authentication
-RUN apt-get update && apt-get install -y awscli
+# Install cloud provider CLI for authentication
+RUN apt-get update && apt-get install -y cloud-cli
 
 # Set environment variables
-ENV AWS_REGION=us-west-2
-ENV AZURE_KEY_VAULT_URL=https://myvault.vault.azure.net/
+ENV CLOUD_REGION=region-1
+ENV CLOUD_VAULT_URL=https://vault.example.com/
 
 # Your application
 COPY app.jar /app.jar

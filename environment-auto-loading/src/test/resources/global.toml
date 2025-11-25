@@ -1,0 +1,38 @@
+# Global Configuration
+# This file contains shared configuration that applies to all environments
+# Top section has common config, environment-specific sections below
+
+# Common configuration (applies to all environments)
+app.name = "ConfNG Demo"
+app.version = "1.0.0"
+api.timeout = 30000
+api.maxRetries = 3
+
+# Database defaults
+db.poolSize = 10
+db.connectionTimeout = 5000
+
+# Feature flags (can be overridden per environment)
+feature.newUI = false
+feature.betaFeatures = false
+
+# Environment-specific configurations
+[dev]
+db.host = "localhost"
+db.port = 5432
+api.baseUrl = "http://localhost:8080"
+feature.betaFeatures = true
+
+[uat]
+db.host = "uat-db.example.com"
+db.port = 5432
+api.baseUrl = "https://uat-api.example.com"
+feature.newUI = true
+
+[prod]
+db.host = "prod-db.example.com"
+db.port = 5432
+api.baseUrl = "https://api.example.com"
+feature.newUI = true
+feature.betaFeatures = false
+

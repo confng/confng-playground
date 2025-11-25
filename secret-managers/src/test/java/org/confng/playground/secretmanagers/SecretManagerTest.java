@@ -24,14 +24,15 @@ public class SecretManagerTest {
     @BeforeClass
     public void setup() {
         // Set system properties to simulate secret manager responses
-        System.setProperty("database/password", "super-secret-password-123");
-        System.setProperty("database/connection-string", "postgresql://user:pass@prod-db:5432/myapp");
-        System.setProperty("api-keys/stripe", "sk_live_abcdef123456789");
-        System.setProperty("api-keys/sendgrid", "SG.xyz789.abcdef123456");
-        System.setProperty("oauth/client-secret", "oauth-secret-xyz789");
-        System.setProperty("oauth/jwt-signing-key", "jwt-signing-key-super-secret");
-        System.setProperty("aws/access-key", "AKIAIOSFODNN7EXAMPLE");
-        System.setProperty("aws/secret-key", "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
+        // IMPORTANT: These are example values only - replace with actual secrets in production
+        System.setProperty("database/password", "example-password-replace-with-real");
+        System.setProperty("database/connection-string", "postgresql://user:pass@example-db:5432/myapp");
+        System.setProperty("api-keys/service1", "example_service1_key_replace_with_real");
+        System.setProperty("api-keys/service2", "example_service2_key_replace_with_real");
+        System.setProperty("oauth/client-secret", "example-oauth-secret-replace-with-real");
+        System.setProperty("oauth/jwt-signing-key", "example-jwt-key-replace-with-real");
+        System.setProperty("cloud/access-key", "EXAMPLE_ACCESS_KEY_REPLACE");
+        System.setProperty("cloud/secret-key", "example_secret_key_replace_with_real");
         System.setProperty("app/version", "2.1.0");
         System.setProperty("app/feature-flags", "{\"newUI\": true, \"betaFeatures\": false}");
     }
@@ -51,13 +52,13 @@ public class SecretManagerTest {
 
     @Test
     public void testApiKeySecrets() {
-        String stripeKey = ConfNG.get(SecretConfig.STRIPE_API_KEY);
-        String sendgridKey = ConfNG.get(SecretConfig.SENDGRID_API_KEY);
-        
-        assertNotNull(stripeKey);
-        assertNotNull(sendgridKey);
-        assertTrue(stripeKey.startsWith("sk_"));
-        assertTrue(sendgridKey.startsWith("SG."));
+        String service1Key = ConfNG.get(SecretConfig.SERVICE1_API_KEY);
+        String service2Key = ConfNG.get(SecretConfig.SERVICE2_API_KEY);
+
+        assertNotNull(service1Key);
+        assertNotNull(service2Key);
+        assertTrue(service1Key.contains("example") || service1Key.contains("service1"));
+        assertTrue(service2Key.contains("example") || service2Key.contains("service2"));
     }
 
     @Test
@@ -74,13 +75,13 @@ public class SecretManagerTest {
     }
 
     @Test
-    public void testAwsCredentials() {
-        String accessKey = ConfNG.get(SecretConfig.AWS_ACCESS_KEY);
-        String secretKey = ConfNG.get(SecretConfig.AWS_SECRET_KEY);
-        
+    public void testCloudCredentials() {
+        String accessKey = ConfNG.get(SecretConfig.CLOUD_ACCESS_KEY);
+        String secretKey = ConfNG.get(SecretConfig.CLOUD_SECRET_KEY);
+
         assertNotNull(accessKey);
         assertNotNull(secretKey);
-        assertTrue(accessKey.startsWith("AKIA"));
+        assertTrue(accessKey.contains("EXAMPLE") || accessKey.contains("ACCESS"));
     }
 
     @Test
@@ -101,7 +102,7 @@ public class SecretManagerTest {
         // This tests that secrets override other configuration sources
         
         String dbPassword = ConfNG.get(SecretConfig.DB_PASSWORD);
-        assertEquals(dbPassword, "super-secret-password-123");
+        assertEquals(dbPassword, "example-password-replace-with-real");
     }
 
 

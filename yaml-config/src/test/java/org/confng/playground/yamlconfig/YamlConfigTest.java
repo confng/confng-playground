@@ -116,35 +116,35 @@ public class YamlConfigTest {
     
     @Test(groups = "yaml-config")
     public void testApiServicesConfiguration() {
-        // Test Payment API configuration
+        // Test Service1 API configuration
         assertThat(ConfNG.get(YamlConfig.API_PAYMENT_BASE_URL))
-            .isEqualTo("https://api.stripe.com");
-        
+            .isEqualTo("https://api.example-service1.com");
+
         assertThat(ConfNG.getInt(YamlConfig.API_PAYMENT_TIMEOUT))
             .isEqualTo(15000);
-        
+
         assertThat(ConfNG.getInt(YamlConfig.API_PAYMENT_RETRY_ATTEMPTS))
             .isEqualTo(3);
-        
+
         assertThat(ConfNG.get(YamlConfig.API_PAYMENT_API_VERSION))
-            .isEqualTo("2023-10-16");
-        
-        // Test Notification API configuration
+            .isEqualTo("v1");
+
+        // Test Service2 API configuration
         assertThat(ConfNG.get(YamlConfig.API_NOTIFICATION_BASE_URL))
-            .isEqualTo("https://api.sendgrid.com");
-        
+            .isEqualTo("https://api.example-service2.com");
+
         assertThat(ConfNG.getInt(YamlConfig.API_NOTIFICATION_TIMEOUT))
             .isEqualTo(10000);
-        
+
         assertThat(ConfNG.getInt(YamlConfig.API_NOTIFICATION_RETRY_ATTEMPTS))
             .isEqualTo(2);
         
         assertThat(ConfNG.get(YamlConfig.API_NOTIFICATION_API_VERSION))
-            .isEqualTo("v3");
-        
-        // Test Analytics API configuration
+            .isEqualTo("v1");
+
+        // Test Service3 API configuration
         assertThat(ConfNG.get(YamlConfig.API_ANALYTICS_BASE_URL))
-            .isEqualTo("https://api.analytics.com");
+            .isEqualTo("https://api.example-service3.com");
         
         assertThat(ConfNG.getInt(YamlConfig.API_ANALYTICS_TIMEOUT))
             .isEqualTo(8000);
@@ -214,17 +214,17 @@ public class YamlConfigTest {
             .isEqualTo("confng-example");
         
         // Test OAuth configuration
-        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_GOOGLE_CLIENT_ID))
-            .isEqualTo("google-client-id");
-        
-        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_GOOGLE_CLIENT_SECRET))
-            .isEqualTo("google-client-secret");
-        
-        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_GITHUB_CLIENT_ID))
-            .isEqualTo("github-client-id");
-        
-        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_GITHUB_CLIENT_SECRET))
-            .isEqualTo("github-client-secret");
+        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_PROVIDER1_CLIENT_ID))
+            .isEqualTo("example-provider1-client-id-replace-with-real");
+
+        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_PROVIDER1_CLIENT_SECRET))
+            .isEqualTo("example-provider1-secret-replace-with-real");
+
+        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_PROVIDER2_CLIENT_ID))
+            .isEqualTo("example-provider2-client-id-replace-with-real");
+
+        assertThat(ConfNG.get(YamlConfig.SECURITY_OAUTH_PROVIDER2_CLIENT_SECRET))
+            .isEqualTo("example-provider2-secret-replace-with-real");
     }
     
     @Test(groups = "yaml-config")
@@ -238,16 +238,16 @@ public class YamlConfigTest {
         
         assertThat(ConfNG.getForDisplay(YamlConfig.SECURITY_JWT_SECRET))
             .isEqualTo("***MASKED***");
-        
-        assertThat(ConfNG.getForDisplay(YamlConfig.SECURITY_OAUTH_GOOGLE_CLIENT_SECRET))
+
+        assertThat(ConfNG.getForDisplay(YamlConfig.SECURITY_OAUTH_PROVIDER1_CLIENT_SECRET))
             .isEqualTo("***MASKED***");
-        
+
         // Test that actual values are still accessible (not masked)
         assertThat(ConfNG.get(YamlConfig.DATABASE_PRIMARY_PASSWORD))
             .isEqualTo("primary_pass");
-        
+
         assertThat(ConfNG.get(YamlConfig.SECURITY_JWT_SECRET))
-            .isEqualTo("jwt-secret-key");
+            .isEqualTo("example-jwt-secret-replace-with-real");
     }
     
     @Test(groups = "yaml-config")
@@ -320,7 +320,7 @@ public class YamlConfigTest {
             .contains("app.name = ConfNG YAML Example")
             .contains("database.primary.url = jdbc:postgresql://localhost:5432/primary")
             .contains("database.primary.password = ***MASKED***")
-            .contains("api.services.payment.baseUrl = https://api.stripe.com")
+            .contains("api.services.service1.baseUrl = https://api.example-service1.com")
             .contains("(sensitive)");
     }
 }

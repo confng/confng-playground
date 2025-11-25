@@ -17,16 +17,16 @@ public enum SecretConfig implements ConfNGKey {
     DB_CONNECTION_STRING("database/connection-string", null, true),
     
     // API keys
-    STRIPE_API_KEY("api-keys/stripe", null, true),
-    SENDGRID_API_KEY("api-keys/sendgrid", null, true),
-    
+    SERVICE1_API_KEY("api-keys/service1", null, true),
+    SERVICE2_API_KEY("api-keys/service2", null, true),
+
     // OAuth secrets
     OAUTH_CLIENT_SECRET("oauth/client-secret", null, true),
     JWT_SIGNING_KEY("oauth/jwt-signing-key", null, true),
-    
-    // Third-party service credentials
-    AWS_ACCESS_KEY("aws/access-key", null, true),
-    AWS_SECRET_KEY("aws/secret-key", null, true),
+
+    // Cloud provider credentials
+    CLOUD_ACCESS_KEY("cloud/access-key", null, true),
+    CLOUD_SECRET_KEY("cloud/secret-key", null, true),
     
     // Non-sensitive configuration (can also be stored in secret manager)
     APP_VERSION("app/version", "1.0.0"),

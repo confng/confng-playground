@@ -55,13 +55,13 @@ database.ssl.trust-store-password=
 ### `secrets.properties` (Sensitive configuration)
 ```properties
 # API Keys and Secrets (marked as sensitive)
-api.stripe.secret-key=sk_test_123456789
-api.sendgrid.api-key=SG.test-key-123
-oauth.client-secret=oauth-secret-123
+api.service1.secret-key=example_api_key_replace_with_real
+api.service2.api-key=example_api_key_replace_with_real
+oauth.client-secret=example_oauth_secret_replace_with_real
 
 # Database Credentials
 database.admin.username=admin
-database.admin.password=admin-password-123
+database.admin.password=example_password_replace_with_real
 ```
 
 ## Key Features
@@ -72,8 +72,8 @@ public enum PropertiesConfig implements ConfNGKey {
     APP_NAME("app.name"),
     DATABASE_URL("database.url"),
     WEBDRIVER_BROWSER("webdriver.browser"),
-    API_STRIPE_KEY("api.stripe.secret-key", null, true); // Sensitive
-    
+    API_SERVICE1_SECRET_KEY("api.service1.secret-key", null, true); // Sensitive
+
     // Implementation details...
 }
 ```
@@ -99,7 +99,7 @@ Boolean debug = ConfNG.getBoolean(PropertiesConfig.APP_DEBUG);
 ### Sensitive Data Protection
 ```java
 // Sensitive values are automatically masked
-String maskedKey = ConfNG.getForDisplay(PropertiesConfig.API_STRIPE_KEY); // Returns "***"
+String maskedKey = ConfNG.getForDisplay(PropertiesConfig.API_SERVICE1_SECRET_KEY); // Returns "***MASKED***"
 ```
 
 ## Use Cases
@@ -134,11 +134,11 @@ thread.pool.size=10
 ### 3. Integration Settings
 ```properties
 # External service configuration
-service.payment.url=https://api.stripe.com
+service.payment.url=https://api.example-payment.com
 service.payment.timeout=30000
 service.payment.retry-attempts=3
 
-service.email.url=https://api.sendgrid.com
+service.email.url=https://api.example-email.com
 service.email.timeout=15000
 service.email.batch-size=100
 ```

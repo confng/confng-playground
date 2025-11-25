@@ -1,0 +1,10 @@
+{
+  "app.environment": "local",
+  "api.url": "http://localhost:8080",
+  "database.url": "jdbc:h2:mem:testdb",
+  "database.username": "sa",
+  "log.level": "DEBUG",
+  "features.newUI": "false",
+  "features.analytics": "false"
+}
+

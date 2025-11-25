@@ -1,0 +1,22 @@
+# Base configuration with environment detection
+environment: dev
+
+# Base values
+app.name: Auto-Load Example
+app.version: 1.0.0
+app.debug: true
+
+# Development environment section
+dev:
+  db.host: localhost
+  db.port: 5432
+  db.name: dev_database
+  api.url: http://localhost:8080
+
+# Production environment section  
+prod:
+  db.host: prod-server.com
+  db.port: 5432
+  db.name: prod_database
+  api.url: https://api.production.com
+

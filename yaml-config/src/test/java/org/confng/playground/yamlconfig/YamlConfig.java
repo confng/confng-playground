@@ -51,20 +51,20 @@ public enum YamlConfig implements ConfNGKey {
     WEBDRIVER_PAGE_LOAD_TIMEOUT("webdriver.pageLoadTimeout"),
     
     // API Services Configuration
-    API_PAYMENT_BASE_URL("api.services.payment.baseUrl"),
-    API_PAYMENT_TIMEOUT("api.services.payment.timeout"),
-    API_PAYMENT_RETRY_ATTEMPTS("api.services.payment.retryAttempts"),
-    API_PAYMENT_API_VERSION("api.services.payment.apiVersion"),
-    
-    API_NOTIFICATION_BASE_URL("api.services.notification.baseUrl"),
-    API_NOTIFICATION_TIMEOUT("api.services.notification.timeout"),
-    API_NOTIFICATION_RETRY_ATTEMPTS("api.services.notification.retryAttempts"),
-    API_NOTIFICATION_API_VERSION("api.services.notification.apiVersion"),
-    
-    API_ANALYTICS_BASE_URL("api.services.analytics.baseUrl"),
-    API_ANALYTICS_TIMEOUT("api.services.analytics.timeout"),
-    API_ANALYTICS_RETRY_ATTEMPTS("api.services.analytics.retryAttempts"),
-    API_ANALYTICS_BATCH_SIZE("api.services.analytics.batchSize"),
+    API_PAYMENT_BASE_URL("api.services.service1.baseUrl"),
+    API_PAYMENT_TIMEOUT("api.services.service1.timeout"),
+    API_PAYMENT_RETRY_ATTEMPTS("api.services.service1.retryAttempts"),
+    API_PAYMENT_API_VERSION("api.services.service1.apiVersion"),
+
+    API_NOTIFICATION_BASE_URL("api.services.service2.baseUrl"),
+    API_NOTIFICATION_TIMEOUT("api.services.service2.timeout"),
+    API_NOTIFICATION_RETRY_ATTEMPTS("api.services.service2.retryAttempts"),
+    API_NOTIFICATION_API_VERSION("api.services.service2.apiVersion"),
+
+    API_ANALYTICS_BASE_URL("api.services.service3.baseUrl"),
+    API_ANALYTICS_TIMEOUT("api.services.service3.timeout"),
+    API_ANALYTICS_RETRY_ATTEMPTS("api.services.service3.retryAttempts"),
+    API_ANALYTICS_BATCH_SIZE("api.services.service3.batchSize"),
     
     // Monitoring Configuration
     MONITORING_METRICS_ENABLED("monitoring.metrics.enabled"),
@@ -89,13 +89,13 @@ public enum YamlConfig implements ConfNGKey {
     SECURITY_JWT_EXPIRATION("security.jwt.expiration"),
     SECURITY_JWT_ISSUER("security.jwt.issuer"),
     
-    SECURITY_OAUTH_GOOGLE_CLIENT_ID("security.oauth.providers.google.clientId"),
-    SECURITY_OAUTH_GOOGLE_CLIENT_SECRET("security.oauth.providers.google.clientSecret", null, true),
-    SECURITY_OAUTH_GOOGLE_REDIRECT_URI("security.oauth.providers.google.redirectUri"),
-    
-    SECURITY_OAUTH_GITHUB_CLIENT_ID("security.oauth.providers.github.clientId"),
-    SECURITY_OAUTH_GITHUB_CLIENT_SECRET("security.oauth.providers.github.clientSecret", null, true),
-    SECURITY_OAUTH_GITHUB_REDIRECT_URI("security.oauth.providers.github.redirectUri");
+    SECURITY_OAUTH_PROVIDER1_CLIENT_ID("security.oauth.providers.provider1.clientId"),
+    SECURITY_OAUTH_PROVIDER1_CLIENT_SECRET("security.oauth.providers.provider1.clientSecret", null, true),
+    SECURITY_OAUTH_PROVIDER1_REDIRECT_URI("security.oauth.providers.provider1.redirectUri"),
+
+    SECURITY_OAUTH_PROVIDER2_CLIENT_ID("security.oauth.providers.provider2.clientId"),
+    SECURITY_OAUTH_PROVIDER2_CLIENT_SECRET("security.oauth.providers.provider2.clientSecret", null, true),
+    SECURITY_OAUTH_PROVIDER2_REDIRECT_URI("security.oauth.providers.provider2.redirectUri");
     
     private final String key;
     private final String defaultValue;
