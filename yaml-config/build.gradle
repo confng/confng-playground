@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.confng:confng:${findProperty('confngVersion') ?: '1.0.3'}"
+    implementation "org.confng:confng:${findProperty('confngVersion') ?: '1.1.0'}"
     
     // YAML parsing library
     implementation "org.yaml:snakeyaml:${findProperty('snakeyamlVersion') ?: '2.0'}"
